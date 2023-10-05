@@ -14,6 +14,7 @@ class Grass: # 클래스 이름은 대문자로 시작
     def update(self):
         pass
 
+
 class Boy:
     def __init__(self):
         self.x, self.y = random.randint(100, 700), 90
@@ -27,6 +28,34 @@ class Boy:
     def draw(self):
         self.image.clip_draw(self.frame*100, 0, 100, 100, self.x, self.y)
 
+
+class Big_ball:
+    def __init__(self):
+        self.x, self.y = random.randint(100, 700), 599
+        self.frame = 0
+        self.image = load_image('ball41x41.png')
+
+    def update(self):
+        while self.y > 70:
+            self.y -= 5
+
+    def draw(self):
+        self.image.draw(self.x, self.y)
+
+
+class Small_ball:
+    def __init__(self):
+        self.x, self.y = random.randint(100, 700), 599
+        self.frame = 0
+        self.image = load_image('ball21x21.png')
+
+    def update(self):
+        pass
+    
+    def draw(self):
+        self.image.draw(self.x, self.y)
+        while self.y > 65:
+            self.y -= 5
 
 
 
@@ -46,6 +75,9 @@ def reset_world():
     global team
     global world
 
+    global big_balls
+    global small_balls
+
     running = True
     world = []
 
@@ -55,6 +87,10 @@ def reset_world():
     team = [Boy() for i in range(11)]
     world += team
 
+    big_balls = [Big_ball() for i in range(10)]
+    world += big_balls
+    small_balls = [Small_ball() for i in range(10)]
+    world += small_balls
 
 
 def update_world():
